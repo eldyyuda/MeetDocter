@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDoctorTable extends Migration
+class CreatePermissionRoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateDoctorTable extends Migration
      */
     public function up()
     {
-        Schema::create('doctor', function (Blueprint $table) {
+        Schema::create('permission_role', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('specialist_id')->nullable()->index('fk_doctor_to_specialist');
-            $table->string('name');
-            $table->string('fee'); 
-            $table->longText('photo')->nullable();
+            $table->foreignId('permision_id')->nullable()->index('fk_permision_role_to_permision');
+            $table->foreignId('role_id')->nullable()->index('fk_permision_role_to_role');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +28,6 @@ class CreateDoctorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctor');
+        Schema::dropIfExists('permission_role');
     }
 }
