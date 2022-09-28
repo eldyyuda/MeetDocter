@@ -25,4 +25,12 @@ class RoleUser extends Model
         'updated_at',
         'delete_at'
     ];
+    public function role()
+    {
+        return $this->belongsTo(Role::class,'role_id');
+    }
+    public function users()
+    {
+        return $this->belongsTo(Users::class,'user_id');
+    }
 }

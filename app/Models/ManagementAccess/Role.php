@@ -24,4 +24,9 @@ class Role extends Model
         'updated_at',
         'delete_at'
     ];
+    public function roleUser()
+    {
+        return $this->hasMany(RoleUser::class,'role_id','id');
+    }
+
 }

@@ -25,8 +25,17 @@ class DetailUser extends Model
         'address',
         'phone',
         'gender',
+        'age',
         'created_at',
         'updated_at',
         'delete_at'
     ];
+    public function typeUser()
+    {
+        return $this->belongsTo(TypeUser::class,'type_user_id');
+    }
+    public function users()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

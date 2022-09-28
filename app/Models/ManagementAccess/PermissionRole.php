@@ -25,4 +25,12 @@ class PermissionRole extends Model
         'updated_at',
         'delete_at'
     ];
+    public function permission()
+    {
+        return $this->belongsTo(Permission::class,'permision_id');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class,'role_id');
+    }
 }
