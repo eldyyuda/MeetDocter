@@ -32,7 +32,7 @@ class Transaction extends Model
     ];
     public function appointment()
     {
-        return $this->belongsTo(Appointment::class,'appointment_id');
+        return $this->belongsTo(Appointment::class,'appointment_id','id');
     }
     
 }

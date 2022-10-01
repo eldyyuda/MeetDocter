@@ -28,7 +28,7 @@ class TypeUser extends Model
     // relational at eloquent, from one to many 
     public function detailUser()
     {
-        return $this->hasMany(DetailUser::class,'type_user_id','id');
+        return $this->hasMany(DetailUser::class,'type_user_id');
     }
 
 }

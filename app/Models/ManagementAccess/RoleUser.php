@@ -27,10 +27,10 @@ class RoleUser extends Model
     ];
     public function role()
     {
-        return $this->belongsTo(Role::class,'role_id');
+        return $this->belongsTo(Role::class,'role_id','id');
     }
     public function users()
     {
-        return $this->belongsTo(Users::class,'user_id');
+        return $this->belongsTo(Users::class,'user_id','id');
     }
 }

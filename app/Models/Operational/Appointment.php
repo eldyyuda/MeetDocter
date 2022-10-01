@@ -33,18 +33,18 @@ class Appointment extends Model
     ];
     public function doctor()
     {
-        return $this->belongsTo(Doctor::class,'doctor_id');
+        return $this->belongsTo(Doctor::class,'doctor_id','id');
     }
     public function users()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
     public function consultation()
     {
-        return $this->belongsTo(Consultation::class,'consultation_id');
+        return $this->belongsTo(Consultation::class,'consultation_id','id');
     }
     public function transaction()
     {
-        return $this->hasMany(Transaction::class,'transaction_id','id');
+        return $this->hasOne(Transaction::class,'transaction_id');
     }
 }

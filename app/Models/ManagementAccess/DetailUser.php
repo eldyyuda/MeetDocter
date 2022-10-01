@@ -32,10 +32,10 @@ class DetailUser extends Model
     ];
     public function typeUser()
     {
-        return $this->belongsTo(TypeUser::class,'type_user_id');
+        return $this->belongsTo(TypeUser::class,'type_user_id','id');
     }
     public function users()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }
