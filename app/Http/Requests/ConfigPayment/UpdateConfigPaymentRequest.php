@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\ConfigPayment;
-
+use App\Models\MasterData\ConfigPayment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateConfigPaymentRequest extends FormRequest
@@ -13,7 +13,7 @@ class UpdateConfigPaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class UpdateConfigPaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'fee'=>[
+                'required','string','max:255',
+            ],
+            'vat'=>[
+                'required','string','max:255',
+            ]
         ];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Consultation;
-
+use App\Models\MasterData\Consultation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreConsultationRequest extends FormRequest
@@ -13,7 +13,7 @@ class StoreConsultationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,14 @@ class StoreConsultationRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            //
+            'vat'=>[
+                'required','string','max:255',
+            ],
+            'name'=>[
+                'required','string','unique:consultation','max:255',
+            ]
         ];
     }
 }

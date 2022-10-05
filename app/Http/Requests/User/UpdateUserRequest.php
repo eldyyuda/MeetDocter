@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\User;
-
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -29,7 +29,8 @@ class UpdateUserRequest extends FormRequest
                 'required','string','max:255',
             ],
             'email'=>[
-                'required','email','max:255',Rule::unique('users')->ignore($this->user),            ],
+                'required','email','max:255',Rule::unique('users')->ignore($this->user),            
+            ],
             'password'=>[
                 'min:8','string','max:255','mixedCase',
             ]
