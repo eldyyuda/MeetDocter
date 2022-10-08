@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Frontsite\AppointmentController;
+use App\Http\Controllers\Frontsite\LandingController;
+use App\Http\Controllers\Frontsite\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::middleware([
     'auth:sanctum',
@@ -26,3 +28,19 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+route::resource('/',LandingController::class);
+route::group(['middleware'=>['auth:sanctum','verified']],
+function () {
+    route::resource('appointment',AppointmentController::class);
+    route::resource('payment',PaymentController::class);
+}
+);
+
+route::group(['prefix'=>'frontsite','as'=>'frontsite.','middleware'=>['auth:sanctum','verified']],
+function () {
+    return view('dashboard');
+}
+);
+
+
+
