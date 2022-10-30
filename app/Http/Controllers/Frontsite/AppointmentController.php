@@ -27,7 +27,7 @@ class AppointmentController extends Controller
     }
     public function index()
     {
-        return view('frontsite.appointment.index');
+        return view('pages.frontsite.appointment.index');
     }
 
     /**

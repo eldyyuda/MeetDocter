@@ -1,3 +1,4 @@
+{{-- <link rel="icon" href="{{asset('assets/frontsite/images/" type="image/png"> --}}
 <link rel="preconnect" href="{{url('https://fonts.googleapis.com')}}" />
 <link rel="preconnect" href="{{url('https://fonts.gstatic.com')}}" crossorigin />
 <link

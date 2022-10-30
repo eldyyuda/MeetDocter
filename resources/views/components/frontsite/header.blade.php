@@ -4,7 +4,7 @@
         <div class="flex flex-auto justify-between">
 
           <!-- Logo Brand -->
-          <a href="index.html" class="flex-shrink-0 flex items-center">
+          <a href="{{route('index')}}" class="flex-shrink-0 flex items-center">
             <img
               class="h-12 lg:h-16 w-auto"
               src="{{ asset('assets/frontsite/images/logo.png')}}"
@@ -25,8 +25,8 @@
                 items-center px-1 pt-1 text-lg font-medium"
            -->
             <a
-              href="#"
-              class="text-[#1E2B4F] relative after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg"
+              href="{{route('index')}}"
+              class="text-[#1E2B4F] relative {{request()->is('/') ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg" :"hover:text-gray-500 inline-flex items-center px-1 pt-1 text-lg font-medium"}}"
             >
               Home
             </a>
@@ -55,7 +55,7 @@
         <!-- Button (no authenticated) -->
         <div class="hidden lg:ml-10 lg:flex lg:items-center">
           <a
-            href="src/pages/sign-in.html"
+            href="{{route('login')}}"
             class="inline-flex items-center rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3"
           >
             Sign In
@@ -131,7 +131,7 @@
                     hover:border-gray-300 hover:text-gray-700" 
         -->
         <a
-          href="#"
+          href="{{route('index')}}"
           class="bg-indigo-50 border-[#0D63F5] text-[#1E2B4F] block pl-3 pr-4 py-2 border-l-4 text-base font-semibold"
           >Home</a
         >
@@ -157,7 +157,7 @@
         class="py-3 border-gray-200"
       >
        <a
-            href="src/pages/sign-in.html"
+            href="{{route('login')}}"
             class="flex items-center justify-center text-center mx-4 rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3"
         >
           Sign In
