@@ -36,44 +36,74 @@
                   <label class="block">
                     <input
                       type="text" name="name"
+                      id="name"
                       required
                       class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                      placeholder="Complete Name"
+                      placeholder="Complete Name" 
+                      autocomplete="name"
+                      value="{{old('name')}}"
                       autofocus
                     />
+                    @if ($errors->has('name'))
+                    <p class="text-red-500 mb-3 text-sm">
+                      {{$errors->first('name')}}
+                    </p>
+                  @endif
                   </label>
   
+                  
                   <label class="block">
                     <input
-                      type="text" name="age"
-                      class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                      placeholder="Age" autofocus
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
+                    placeholder="Email Address"
+                    autofocus
+                    value="{{old('email')}}"
                     />
+                    @if ($errors->has('email'))
+                    <p class="text-red-500 mb-3 text-sm">
+                      {{$errors->first('email')}}
+                    </p>
+                  @endif
                   </label>
-  
+                  
                   <label class="block">
                     <input
-                      type="email"
-                      name="email"
-                      class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                      placeholder="Email Address"
-                      autofocus
+                    type="password"
+                    name="password"
+                    id="password"
+                    autofocus
+                    class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    value="{{old('password')}}"
                     />
+                    @if ($errors->has('password'))
+                    <p class="text-red-500 mb-3 text-sm">
+                      {{$errors->first('password')}}
+                    </p>
+                  @endif
                   </label>
-  
                   <label class="block">
                     <input
-                      type="password"
-                      name="password"
-                      autofocus
+                      type="password" name="password_confirmation"
+                      id="password_confirmation"
                       class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                      placeholder="Password"
+                      placeholder="Confirm Password" autofocus autocomplete="new-password"
+                      value="{{old('password_confirmation')}}"
                     />
+                    @if ($errors->has('password_confirmation'))
+                    <p class="text-red-500 mb-3 text-sm">
+                      {{$errors->first('password_confirmation')}}
+                    </p>
+                  @endif
                   </label>
                   
                   <div class="mt-10 grid gap-6">
                     <button type="submit"
-                      class="text-center text-white text-lg font-medium bg-[#0D63F3] px-10 py-4 rounded-full"
+                    class="text-center text-white text-lg font-medium bg-[#0D63F3] px-10 py-4 rounded-full"
                     >
                       Continue
                     </button>
