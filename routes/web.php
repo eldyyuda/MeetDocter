@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontsite\AppointmentController;
 use App\Http\Controllers\Frontsite\LandingController;
 use App\Http\Controllers\Frontsite\PaymentController;
+use App\Http\Controllers\Backsite\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,9 +37,9 @@ function () {
 }
 );
 
-route::group(['prefix'=>'frontsite','as'=>'frontsite.','middleware'=>['auth:sanctum','verified']],
+route::group(['prefix'=>'backsite','as'=>'backsite.','middleware'=>['auth:sanctum','verified']],
 function () {
-    return view('dashboard');
+    route::resource('dashboard',DashboardController::class);
 }
 );
 

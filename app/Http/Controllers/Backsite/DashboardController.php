@@ -1,35 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Frontsite;
+namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-use Auth;
-
-use App\Models\User;
-use App\Models\Operational\Doctor;
-use App\Models\MasterData\Consultation;
-use App\Models\MasterData\ConfigPayment;
-use App\Models\MasterData\Specialist;
-use App\Models\Operational\Transaction;
-use App\Models\Operational\Appointment;
-
-class PaymentController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
-        return view('pages.frontsite.payment.index');
+        return view('pages.backsite.dashboard.index');
     }
 
     /**
@@ -39,7 +24,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        return abort(404);
+        //
     }
 
     /**
@@ -50,7 +35,7 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        return abort(404);
+        //
     }
 
     /**
@@ -61,7 +46,7 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        return abort(404);
+        //
     }
 
     /**
@@ -72,7 +57,7 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        return abort(404);
+        //
     }
 
     /**
@@ -84,7 +69,7 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return abort(404);
+        //
     }
 
     /**
@@ -95,6 +80,6 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        return abort(404);
+        //
     }
 }

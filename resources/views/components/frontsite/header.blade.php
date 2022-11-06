@@ -53,14 +53,44 @@
         </div>
 
         <!-- Button (no authenticated) -->
+        @if (Route::has('login'))
         <div class="hidden lg:ml-10 lg:flex lg:items-center">
+            @auth
+                {{-- <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> --}}
+                <a
+                href="{{route('dashboard')}}"
+                class="inline-flex items-center rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3"
+              >
+                Dashboard
+              </a>
+            @else
+            <a
+            href="{{route('login')}}"
+            class="inline-flex items-center rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3"
+            >
+            Sign In
+          </a>
+
+                @if (Route::has('register'))
+                    {{-- <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a> --}}
+                    <a
+                    href="{{route('register')}}"
+                    class="inline-flex items-center rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3 ml-3"
+                  >
+                    Register
+                  </a>
+                @endif
+            @endauth
+        </div>
+    @endif
+        {{-- <div class="hidden lg:ml-10 lg:flex lg:items-center">
           <a
             href="{{route('login')}}"
             class="inline-flex items-center rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3"
           >
             Sign In
           </a>
-        </div>
+        </div> --}}
 
         <!-- Mobile Toggle button -->
         <div class="-mr-2 flex items-center lg:hidden">

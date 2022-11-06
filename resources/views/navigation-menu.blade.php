@@ -8,6 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
+                    
                 </div>
 
                 <!-- Navigation Links -->
@@ -15,7 +16,11 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="/" :active="request()->routeIs('/')">
+                        {{ __('Home') }}
+                    </x-jet-nav-link>
                 </div>
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
