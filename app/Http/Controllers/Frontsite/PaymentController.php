@@ -27,6 +27,7 @@ class PaymentController extends Controller
     {
         $this->middleware('auth');
     }
+    
     public function index()
     {
         return view('pages.frontsite.payment.index');

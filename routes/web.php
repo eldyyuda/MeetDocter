@@ -50,11 +50,15 @@ route::group(['prefix'=>'backsite','as'=>'backsite.','middleware'=>['auth:sanctu
 function () {
     route::resource('dashboard',DashboardController::class);
     route::resource('role',RoleController::class);
-    route::resource('config-payment',ConfigPaymentController::class);
+    route::resource('config_payment',ConfigPaymentController::class);
     route::resource('consultation',ConsultationController::class);
-    route::resource('hospital-patient',HospitalPatientController::class);
+    route::resource('hospital_patient',HospitalPatientController::class);
     route::resource('permission',PermissionController::class);
-    route::resource('report-appointment',ReportAppointmentController::class);
+    route::resource('appointment',ReportAppointmentController::class);
+    route::resource('transaction',ReportTransactionController::class);
+    route::resource('specialist',SpecialistController::class);
+    route::resource('type_user',TypeUserController::class);
+    route::resource('user',UserController::class);
 }
 );
 
