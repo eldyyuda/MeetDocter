@@ -5,6 +5,15 @@ use App\Http\Controllers\Frontsite\AppointmentController;
 use App\Http\Controllers\Frontsite\LandingController;
 use App\Http\Controllers\Frontsite\PaymentController;
 use App\Http\Controllers\Backsite\DashboardController;
+use App\Http\Controllers\Backsite\RoleController;
+use App\Http\Controllers\Backsite\ConfigPaymentController;
+use App\Http\Controllers\Backsite\ConsultationController;
+use App\Http\Controllers\Backsite\HospitalPatientController;
+use App\Http\Controllers\Backsite\PermissionController;
+use App\Http\Controllers\Backsite\ReportAppointmentController;
+use App\Http\Controllers\Backsite\SpecialistController;
+use App\Http\Controllers\Backsite\TypeUserController;
+use App\Http\Controllers\Backsite\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +49,12 @@ function () {
 route::group(['prefix'=>'backsite','as'=>'backsite.','middleware'=>['auth:sanctum','verified']],
 function () {
     route::resource('dashboard',DashboardController::class);
+    route::resource('role',RoleController::class);
+    route::resource('config-payment',ConfigPaymentController::class);
+    route::resource('consultation',ConsultationController::class);
+    route::resource('hospital-patient',HospitalPatientController::class);
+    route::resource('permission',PermissionController::class);
+    route::resource('report-appointment',ReportAppointmentController::class);
 }
 );
 
