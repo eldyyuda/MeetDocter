@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PermisionController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class PermisionController extends Controller
     
     public function index()
     {
-        //
+        return view('pages.backsite.management-access.permission.index');
     }
 
     /**
@@ -29,7 +29,7 @@ class PermisionController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -40,7 +40,7 @@ class PermisionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -51,7 +51,7 @@ class PermisionController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -62,7 +62,7 @@ class PermisionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -74,7 +74,7 @@ class PermisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -85,6 +85,6 @@ class PermisionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 }

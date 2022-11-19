@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backsite;
+namespace App\Http\Controllers\Frontsite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ConfigPaymentController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class ConfigPaymentController extends Controller
     }
     public function index()
     {
-        return view('pages.backsite.master-data.config-payment.index');
+        return view('pages.frontsite.success.sign-up-success');
     }
 
     /**
@@ -28,7 +28,6 @@ class ConfigPaymentController extends Controller
      */
     public function create()
     {
-        //
         return abort(404);
     }
 
@@ -40,9 +39,7 @@ class ConfigPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
         return abort(404);
-
     }
 
     /**

@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Frontsite\AppointmentController;
 use App\Http\Controllers\Frontsite\LandingController;
 use App\Http\Controllers\Frontsite\PaymentController;
+use App\Http\Controllers\Frontsite\RegisterController;
+
 use App\Http\Controllers\Backsite\DashboardController;
 use App\Http\Controllers\Backsite\RoleController;
 use App\Http\Controllers\Backsite\ConfigPaymentController;
@@ -11,6 +14,7 @@ use App\Http\Controllers\Backsite\ConsultationController;
 use App\Http\Controllers\Backsite\HospitalPatientController;
 use App\Http\Controllers\Backsite\PermissionController;
 use App\Http\Controllers\Backsite\ReportAppointmentController;
+use App\Http\Controllers\Backsite\ReportTransactionController;
 use App\Http\Controllers\Backsite\SpecialistController;
 use App\Http\Controllers\Backsite\TypeUserController;
 use App\Http\Controllers\Backsite\UserController;
@@ -43,6 +47,7 @@ route::group(['middleware'=>['auth:sanctum','verified']],
 function () {
     route::resource('appointment',AppointmentController::class);
     route::resource('payment',PaymentController::class);
+    Route::resource('register_success', RegisterController::class);
 }
 );
 

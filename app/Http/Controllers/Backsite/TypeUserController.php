@@ -5,6 +5,14 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// use Gate;
+use Auth;
+
+use App\Models\MasterData\TypeUser;
+
 class TypeUserController extends Controller
 {
     /**
@@ -19,7 +27,9 @@ class TypeUserController extends Controller
     
     public function index()
     {
-        //
+        $type_users = TypeUser::orderby('created_at','desc')->get();
+        // dd($type_user);
+        return view('pages.backsite.management-access.type-user.index',compact('type_users'));
     }
 
     /**
@@ -29,7 +39,7 @@ class TypeUserController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -40,7 +50,7 @@ class TypeUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -51,7 +61,7 @@ class TypeUserController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -62,7 +72,7 @@ class TypeUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -74,7 +84,7 @@ class TypeUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -85,6 +95,6 @@ class TypeUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 }
