@@ -3,7 +3,19 @@
 namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConfigPayment\UpdateConfigPaymentRequest;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// use Gate;
+use Auth;
+use App\Http\Requests\Doctor\StoreDoctorRequest;
+use App\Http\Requests\Doctor\UpdateDoctorRequest;
+
+use App\Models\MasterData\ConfigPayment;
+use App\Models\Operational\Doctor;
 
 class ConfigPaymentController extends Controller
 {
@@ -18,7 +30,8 @@ class ConfigPaymentController extends Controller
     }
     public function index()
     {
-        return view('pages.backsite.master-data.config-payment.index');
+        $configPayment=ConfigPayment::all();
+        return view('pages.backsite.master-data.config-payment.index',compact('configPayment'));
     }
 
     /**
@@ -62,9 +75,9 @@ class ConfigPaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ConfigPayment $configPayment)
     {
-        return abort(404);
+        return view('pages.backsite.master-data.config-payment.index', compact('configPayment'));
     }
 
     /**
@@ -74,9 +87,18 @@ class ConfigPaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateConfigPaymentRequest $request, ConfigPayment $configPayment)
     {
-        return abort(404);
+        $data= $request->all();
+        
+        try {
+            $configPayment->update($data);
+            alert()->success('Success Message','Successfully added Updated Specialist!');
+            return redirect()->route('pages.backsite.master-data.config-payment.index');
+        } catch (\Throwable $th) {
+            alert()->error('Error Message',$th);
+            return back();
+        }
     }
 
     /**

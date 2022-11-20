@@ -10,28 +10,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 // use Gate;
 use Auth;
-use App\Http\Requests\Specialist\StoreSpecialistRequest;
-use App\Http\Requests\Specialist\UpdateSpecialistRequest;
+use App\Http\Requests\Doctor\StoreDoctorRequest;
+use App\Http\Requests\Doctor\UpdateDoctorRequest;
 
 use App\Models\MasterData\Specialist;
+use App\Models\Operational\Doctor;
+use PhpParser\Comment\Doc;
 
-class SpecialistController extends Controller
+class DoctorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     public function index()
     {
-        $specialist=Specialist::orderby('created_at','desc')->get();
-        // dd($specialists);
-        return view('pages.backsite.master-data.specialist.index',compact('specialist'));
+        $doctors= Doctor::orderby('created_at','desc')->get();
+        $specialists = Specialist::orderby('name','asc')->get();
+
+        return view('pages.backsite.operational.doctor.index',compact('doctors','specialists'));
     }
 
     /**
@@ -39,9 +37,17 @@ class SpecialistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(StoreDoctorRequest $request)
     {
-        return abort(404);
+        $data = $request->all();
+        try {
+            $doctors=Doctor::create($data);
+            alert()->success('Success Message','Successfully added new Doctor!');
+            return redirect()->route('pages.backsite.operational.doctor.index');
+        } catch (\Throwable $th) {
+            alert()->error('Error Message',$th);
+            return back();
+        }
     }
 
     /**
@@ -50,17 +56,18 @@ class SpecialistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSpecialistRequest $request)
+    public function store(StoreDoctorRequest $request)
     {
-        $data = $request->all();
+        $data=$request->all();
         try {
-            $specialists = Specialist::create($data);
-            alert()->success('Success Message','Successfully added new Specialist!');
-            return redirect()->route('pages.backsite.master-data.specialist.index');
+            $doctors= Doctor::create($data);
+            alert()->success('Success Message','Successfully added a new Doctor!!');
+            return redirect()->route('pages.backsite.operational.doctor');
         } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+            alert()->success('Error Message',$th);
             return back();
         }
+
     }
 
     /**
@@ -69,11 +76,9 @@ class SpecialistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Specialist $specialist)
+    public function show(Doctor $doctor)
     {
-        // $specialists =
-        // dd($specialist);
-        return view('pages.backsite.master-data.specialist.show',compact('specialist'));
+        return view('pages.backsite.operational.doctor', compact('doctor'));
     }
 
     /**
@@ -82,10 +87,10 @@ class SpecialistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Specialist $specialist)
+    public function edit(Doctor $doctor)
     {
-        // dd($specialist);
-        return view('pages.backsite.master-data.specialist.edit',compact('specialist'));
+        $specialists = Specialist::orderby('name', 'ASC')->get();
+        return view('pages.backsite.operational.doctor', compact('doctor','specialists'));
     }
 
     /**
@@ -95,14 +100,14 @@ class SpecialistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSpecialistRequest $request, Specialist $specialist)
+    public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
         $data= $request->all();
         
         try {
-            $specialist->update($data);
-            alert()->success('Success Message','Successfully added Updated Specialist!');
-            return redirect()->route('pages.backsite.master-data.specialist.index');
+            $doctor->update($data);
+            alert()->success('Success Message','Successfully added Updated Doctor!');
+            return redirect()->route('pages.backsite.master-data.operational.index');
         } catch (\Throwable $th) {
             alert()->error('Error Message',$th);
             return back();
@@ -115,17 +120,15 @@ class SpecialistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Specialist $specialist)
+    public function destroy(Doctor $doctor)
     {
-       
         try {
-            $specialist->delete();
+            $doctor->delete();
             alert()->success('Success Message','Successfully delete Specialist!');
             return redirect()->route('pages.backsite.master-data.specialist.index');
         } catch (\Throwable $th) {
             alert()->error('Error Message',$th);
             return back();
         }
-        
     }
 }
