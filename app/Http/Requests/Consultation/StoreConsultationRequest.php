@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Consultation;
 use App\Models\MasterData\Consultation;
 use Illuminate\Foundation\Http\FormRequest;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreConsultationRequest extends FormRequest
 {
@@ -13,6 +15,7 @@ class StoreConsultationRequest extends FormRequest
      */
     public function authorize()
     {
+        abort_if(Gate::denies('consultation_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return true;
     }
 

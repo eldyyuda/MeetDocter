@@ -24,6 +24,7 @@ class UpdateSpecialistRequest extends FormRequest
      */
     public function rules()
     {
+        abort_if(Gate::denies('specialist_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return [
             'name'=>[
                 'required','string','max:255',Rule::unique('specialist')->ignore($this->specialist)

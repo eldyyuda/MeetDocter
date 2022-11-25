@@ -8,6 +8,7 @@ use App\Http\Requests\Role\UpdateRoleRequest;
 use Illuminate\Http\Request;
 
 use Auth;
+use Gate;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,6 +29,7 @@ class RoleController extends Controller
     
     public function index()
     {
+        abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $role=Role::all();
         return view('pages.backsite.management-access.role.index', compact('role'));
     }
@@ -69,6 +71,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
+        abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $role->load('permission');
         return view('pages.backsite.management-access.role.show', compact('role'));
     }
@@ -81,6 +85,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $permission = Permission::all();
         $role->load('permission');
         return view('pages.backsite.management-access.role.edit', compact('role','permission'));
@@ -114,6 +119,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         try {
             $role->delete();
             alert()->success('Success Message','Successfully delete Specialist!');

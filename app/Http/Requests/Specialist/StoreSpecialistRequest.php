@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Specialist;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Gate;
 
 class StoreSpecialistRequest extends FormRequest
 {
@@ -13,6 +14,7 @@ class StoreSpecialistRequest extends FormRequest
      */
     public function authorize()
     {
+        abort_if(Gate::denies('specialist_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return true;
     }
 

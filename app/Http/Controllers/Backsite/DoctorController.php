@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-// use Gate;
+use Gate;
 use Auth;
+use File;
 use App\Http\Requests\Doctor\StoreDoctorRequest;
 use App\Http\Requests\Doctor\UpdateDoctorRequest;
 
@@ -26,6 +27,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('doctor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $doctors= Doctor::orderby('created_at','desc')->get();
         $specialists = Specialist::orderby('name','asc')->get();
 
@@ -78,6 +80,8 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
+        abort_if(Gate::denies('doctor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('pages.backsite.operational.doctor.show', compact('doctor'));
     }
 
@@ -89,6 +93,7 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
+        abort_if(Gate::denies('doctor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $specialists = Specialist::orderby('name', 'ASC')->get();
         return view('pages.backsite.operational.doctor.edit', compact('doctor','specialists'));
     }

@@ -4,7 +4,9 @@ namespace App\Http\Requests\Consultation;
 use App\Models\MasterData\Consultation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\Response;
 
+use Gate;
 class UpdateConsultationRequest extends FormRequest
 {
     /**
@@ -14,6 +16,7 @@ class UpdateConsultationRequest extends FormRequest
      */
     public function authorize()
     {
+        abort_if(Gate::denies('consultation_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return true;
     }
 
