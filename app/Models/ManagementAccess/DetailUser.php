@@ -32,7 +32,7 @@ class DetailUser extends Model
     ];
     public function typeUser()
     {
-        return $this->belongsTo(TypeUser::class,'type_user_id','id');
+        return $this->belongsTo('App\Models\MasterData\TypeUser','type_user_id','id');
     }
     public function users()
     {

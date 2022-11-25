@@ -62,7 +62,7 @@ class DoctorController extends Controller
         try {
             $doctors= Doctor::create($data);
             alert()->success('Success Message','Successfully added a new Doctor!!');
-            return redirect()->route('pages.backsite.operational.doctor');
+            return redirect()->route('pages.backsite.operational.doctor.index');
         } catch (\Throwable $th) {
             alert()->success('Error Message',$th);
             return back();
@@ -78,7 +78,7 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
-        return view('pages.backsite.operational.doctor', compact('doctor'));
+        return view('pages.backsite.operational.doctor.show', compact('doctor'));
     }
 
     /**
@@ -90,7 +90,7 @@ class DoctorController extends Controller
     public function edit(Doctor $doctor)
     {
         $specialists = Specialist::orderby('name', 'ASC')->get();
-        return view('pages.backsite.operational.doctor', compact('doctor','specialists'));
+        return view('pages.backsite.operational.doctor.edit', compact('doctor','specialists'));
     }
 
     /**

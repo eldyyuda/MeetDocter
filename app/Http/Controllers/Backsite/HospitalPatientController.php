@@ -5,6 +5,21 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\Eloquent\Builder;
+
+use Auth;
+use App\Models\User;
+
+use App\Models\Operational\Appointment;
+use App\Models\Operational\Transaction;
+use App\Models\Operational\Doctor;
+use App\Models\MasterData\Specialist;
+use App\Models\MasterData\Consultation;
+use App\Models\MasterData\ConfigPayment;
+
 class HospitalPatientController extends Controller
 {
     /**
@@ -18,7 +33,12 @@ class HospitalPatientController extends Controller
     }
     public function index()
     {
-        // return view('pages.backsite.master-data.config-payment.index');
+        $hospitalPatient = User::whereHas('detail_user', function(Builder $query){
+            $query->where('type_user_id',3);
+
+        })->orderby('created_at','desc')
+        ->get();
+        return view('pages.backsite.operational.hospital-patient.index',compact('hospitalPatient'));
     }
 
     /**

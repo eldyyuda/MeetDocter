@@ -26,7 +26,20 @@ class Role extends Model
     ];
     public function roleUser()
     {
-        return $this->hasMany(RoleUser::class,'role_id');
+        return $this->hasMany('App\Models\ManagementAccess\RoleUser','role_id');
+    }
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    public function permission()
+    {
+        return $this->belongsToMany('App\Models\ManagementAccess\Permission');
+    }
+    public function permissionRole()
+    {
+        // 2 parameter (path model, field foreign key)
+        return $this->hasMany('App\Models\ManagementAccess\PermissionRole', 'role_id');
     }
 
 }

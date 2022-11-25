@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Auth;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+use App\Models\Operational\Transaction;
 class ReportTransactionController extends Controller
 {
     /**
@@ -19,7 +24,8 @@ class ReportTransactionController extends Controller
     
     public function index()
     {
-        return view('pages.backsite.operasional.transaction.index');
+        $transaction=Transaction::all();
+        return view('pages.backsite.operational.transaction.index',compact('transaction'));
     }
 
     /**
@@ -49,9 +55,9 @@ class ReportTransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        return abort(404);
+        return view('pages.backsite.operational.transaction.show', compact('transaction'));
     }
 
     /**

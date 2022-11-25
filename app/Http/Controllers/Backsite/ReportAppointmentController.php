@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Auth;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+use App\Models\Operational\Appointment;
+
 class ReportAppointmentController extends Controller
 {
     /**
@@ -19,7 +25,8 @@ class ReportAppointmentController extends Controller
     
     public function index()
     {
-        return view('pages.backsite.operasional.appointment.index');
+        $appointment=Appointment::all();
+        return view('pages.backsite.operational.appointment.index', compact('appointment'));
     }
 
     /**
@@ -49,9 +56,9 @@ class ReportAppointmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Appointment $appointment)
     {
-        return abort(404);
+        return view('pages.backsite.operational.appointment.show', compact('appointment'));
     }
 
     /**

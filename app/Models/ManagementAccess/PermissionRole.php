@@ -27,10 +27,10 @@ class PermissionRole extends Model
     ];
     public function permission()
     {
-        return $this->belongsTo(Permission::class,'permision_id','id');
+        return $this->belongsTo('App\Models\ManagementAccess\Permission','permision_id','id');
     }
     public function role()
     {
-        return $this->belongsTo(Role::class,'role_id','id');
+        return $this->belongsTo('App\Models\ManagementAccess\Role','role_id','id');
     }
 }
