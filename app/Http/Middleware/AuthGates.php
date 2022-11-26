@@ -5,9 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Gate;
 use App\Models\ManagementAccess\Role;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 class AuthGates
 {
     /**
@@ -19,26 +20,31 @@ class AuthGates
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = \Auth::user();
-        if (!app()->runningInConsole&& $user) {
-            $roles = Role::with('permission')->get();
-            $permissionArray=[];
-            foreach ($roles as $role) {
-                foreach ($role->permission as $permission) {
-                    # code...
-                    $permissionArray[$permission->title][] = $role->id;
-                }
-            }
+        $user = Auth::user();
+        // dd($user);
+        if (!app()->runningInConsole() && $user) 
+        {
+            $roles              = Role::with('permission')->get();
+            $permissionsArray   =[];
             
-        }
-                    // check user role
-                    foreach ($permissionsArray as $title => $roles) {
-                        Gate::define($title, function(\App\Models\User $user)
+            // dd($roles);
+            foreach ($roles as $role) {
+
+                foreach ($role->permission as $permission) {
+                    $permissionsArray[$permission->title][] = $role->id;
+                    }
+                }
+
+                foreach ($permissionsArray as $title => $roles) {
+                    Gate::define($title, function(\App\Models\User $user)
                         use ($roles) {
                             return count(array_intersect($user->role->pluck('id')
-                            ->toArray(), $roles)) > 0;
-                        });
+                                ->toArray(), $roles)) > 0;
+                            });
                     }
+            }
+        
+
 
         return $next($request);
     }

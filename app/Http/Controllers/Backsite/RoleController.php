@@ -8,7 +8,7 @@ use App\Http\Requests\Role\UpdateRoleRequest;
 use Illuminate\Http\Request;
 
 use Auth;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 

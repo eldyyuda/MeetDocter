@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Auth;
 use File;
 use App\Http\Requests\Doctor\StoreDoctorRequest;

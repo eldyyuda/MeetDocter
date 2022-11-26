@@ -5,6 +5,15 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\MasterData\TypeUser;
+use App\Models\User;
+use App\Models\ManagementAccess\Role;
+use App\Models\ManagementAccess\DetailUser;
+
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
+
+use App\Http\Requests\User\UpdateUserRequest;
 class UserController extends Controller
 {
     /**
@@ -19,7 +28,8 @@ class UserController extends Controller
     
     public function index()
     {
-        return view('pages.backsite.management-access.user');
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('pages.backsite.management-access.user.index');
     }
 
     /**
@@ -49,9 +59,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        return abort(404);
+        abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $user->load('role');
+
+        return view('pages.backsite.management-access.user.show', compact('user'));
     }
 
     /**
@@ -60,9 +73,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        return abort(404);
+        abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $role = Role::all()->pluck('title', 'id');
+        $type_user = TypeUser::orderBy('name', 'asc')->get();
+        $user->load('role');
+
+        return view('pages.backsite.management-access.user.edit', compact('user', 'role', 'type_user'));
     }
 
     /**
@@ -72,9 +91,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        return abort(404);
+        $data = $request->all();
+
+        // update to database
+        $user->update($data);
+
+        // update roles
+        $user->role()->sync($request->input('role', []));
+
+        // save to detail user , to set type user
+        $detail_user = DetailUser::find($user['id']);
+        $detail_user->type_user_id = $request['type_user_id'];
+        $detail_user->save();
+
+        alert()->success('Success Message', 'Successfully updated user');
+        return redirect()->route('backsite.user.index');
     }
 
     /**
@@ -83,8 +116,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        return abort(404);
+        abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $user->forceDelete();
+
+        alert()->success('Success Message', 'Successfully deleted user');
+        return back();
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class RoleUserSeeder extends Seeder
 {
@@ -13,23 +14,8 @@ class RoleUserSeeder extends Seeder
      */
     public function run()
     {
-        $roleUser= [
-            [
-                'name' => 'Suster',
-                'created_at' =>date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'name' => 'Doctor',
-                'created_at' =>date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'name'=>'patient',
-                'created_at' =>date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
-        ];
+    
         // TypeUser::insert($typeUser);
+        User::findOrFail(1)->role()->sync(1);
     }
 }

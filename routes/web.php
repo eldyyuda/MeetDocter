@@ -18,6 +18,7 @@ use App\Http\Controllers\Backsite\ReportTransactionController;
 use App\Http\Controllers\Backsite\SpecialistController;
 use App\Http\Controllers\Backsite\TypeUserController;
 use App\Http\Controllers\Backsite\UserController;
+use App\Http\Controllers\Backsite\DoctorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,7 @@ function () {
     route::resource('specialist',SpecialistController::class);
     route::resource('type_user',TypeUserController::class);
     route::resource('user',UserController::class);
+    Route::resource('doctor', DoctorController::class);
 }
 );
 

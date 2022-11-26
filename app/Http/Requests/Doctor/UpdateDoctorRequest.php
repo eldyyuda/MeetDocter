@@ -3,7 +3,8 @@
 namespace App\Http\Requests\Doctor;
 use App\Models\Operational\Doctor;
 use Illuminate\Foundation\Http\FormRequest;
-use Gate;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateDoctorRequest extends FormRequest
 {
