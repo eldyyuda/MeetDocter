@@ -29,7 +29,12 @@ class UserController extends Controller
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('pages.backsite.management-access.user.index');
+
+        $user = User::orderBy('created_at', 'desc')->get();
+        $type_user = TypeUser::orderBy('name', 'asc')->get();
+        $roles = Role::all()->pluck('title', 'id');
+
+        return view('pages.backsite.management-access.user.index', compact('user', 'roles', 'type_user'));
     }
 
     /**
@@ -61,7 +66,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $user->load('role');
 
         return view('pages.backsite.management-access.user.show', compact('user'));
@@ -79,6 +86,7 @@ class UserController extends Controller
 
         $role = Role::all()->pluck('title', 'id');
         $type_user = TypeUser::orderBy('name', 'asc')->get();
+        // dd($type_user);
         $user->load('role');
 
         return view('pages.backsite.management-access.user.edit', compact('user', 'role', 'type_user'));

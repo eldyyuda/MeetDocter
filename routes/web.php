@@ -64,9 +64,10 @@ function () {
     route::resource('transaction',ReportTransactionController::class);
     route::resource('specialist',SpecialistController::class);
     route::resource('type_user',TypeUserController::class);
-    route::resource('user',UserController::class);
+    route::resource('user', UserController::class);
     Route::resource('doctor', DoctorController::class);
-}
+
+    }
 );
 
 

@@ -33,7 +33,7 @@ class HospitalPatientController extends Controller
     }
     public function index()
     {
-        $hospitalPatient = User::whereHas('detail_user', function(Builder $query){
+        $hospitalPatient = User::whereHas('detailUser', function(Builder $query){
             $query->where('type_user_id',3);
 
         })->orderby('created_at','desc')

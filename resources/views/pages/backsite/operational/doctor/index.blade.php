@@ -80,7 +80,7 @@
                                                                     id="specialist_id"
                                                                     class="form-control select2" required>
                                                                     <option value="{{ '' }}" disabled selected>Choose</option>
-                                                                @foreach($specialist as $key => $specialist_item)
+                                                                @foreach($specialists as $key => $specialist_item)
                                                                     <option value="{{ $specialist_item->id }}">{{ $specialist_item->name }}</option>
                                                                 @endforeach
                                                             </select>
@@ -185,7 +185,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @forelse($doctor as $key => $doctor_item)
+                                                        @forelse($doctors as $key => $doctor_item)
                                                             <tr data-entry-id="{{ $doctor_item->id }}">
                                                                 <td>{{ isset($doctor_item->created_at) ? date("d/m/Y H:i:s",strtotime($doctor_item->created_at)) : '' }}</td>
                                                                 <td>{{ $doctor_item->specialist->name ?? '' }}</td>
