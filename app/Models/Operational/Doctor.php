@@ -29,10 +29,10 @@ class Doctor extends Model
     ];
     public function specialist()
     {
-        return $this->belongsTo(Specialist::class,'specialist_id','id');
+        return $this->belongsTo('App\Models\MasterData\Specialist','specialist_id','id');
     }
     public function appointment()
     {
-        return $this->hasMany(Appointment::class,'appointment_id');
+        return $this->hasMany('App\Models\Operational\Appointment','appointment_id');
     }
 }

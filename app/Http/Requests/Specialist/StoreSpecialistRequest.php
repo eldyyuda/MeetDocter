@@ -3,7 +3,8 @@
 namespace App\Http\Requests\Specialist;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Gate;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreSpecialistRequest extends FormRequest
 {

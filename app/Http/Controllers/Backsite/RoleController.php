@@ -56,7 +56,7 @@ class RoleController extends Controller
         try {
             $role = Role::create($data);
             alert()->success('Success Message','Successfully added new Role!');
-            return redirect()->route('pages.backsite.management-access.role.index');
+            return redirect()->route('backsite.role.index');
         } catch (\Throwable $th) {
             alert()->error('Error Message',$th);
             return back();
@@ -104,7 +104,7 @@ class RoleController extends Controller
             $role->update($request->all());
             $role->permission()->sync($request->input('permission',[]));
             alert()->success('Success Message','Successfully added Updated Role!');
-            return redirect()->route('pages.backsite.management-access.role.index');
+            return redirect()->route('backsite.role.index');
         } catch (\Throwable $th) {
             alert()->error('Error Message',$th);
             return back();
@@ -124,7 +124,7 @@ class RoleController extends Controller
         try {
             $role->delete();
             alert()->success('Success Message','Successfully delete Specialist!');
-            return redirect()->route('pages.backsite.management-access.role.index');
+            return redirect()->route('backsite.role.index');
         } catch (\Throwable $th) {
             alert()->error('Error Message',$th);
             return back();

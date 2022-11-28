@@ -4,6 +4,8 @@ namespace App\Http\Requests\Specialist;
 use App\Models\MasterData\Specialist;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateSpecialistRequest extends FormRequest
 {

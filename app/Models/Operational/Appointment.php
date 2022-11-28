@@ -33,7 +33,7 @@ class Appointment extends Model
     ];
     public function doctor()
     {
-        return $this->belongsTo(Doctor::class,'doctor_id','id');
+        return $this->belongsTo('App\Models\Operational\Doctor','doctor_id','id');
     }
     public function users()
     {
@@ -41,10 +41,10 @@ class Appointment extends Model
     }
     public function consultation()
     {
-        return $this->belongsTo(Consultation::class,'consultation_id','id');
+        return $this->belongsTo('App\Models\MasterData\Consultation','consultation_id','id');
     }
     public function transaction()
     {
-        return $this->hasOne(Transaction::class,'transaction_id');
+        return $this->hasOne('App\Models\Operational\Transaction','transaction_id');
     }
 }

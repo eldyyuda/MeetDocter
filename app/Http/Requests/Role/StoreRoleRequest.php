@@ -5,7 +5,7 @@ use App\Models\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 class StoreRoleRequest extends FormRequest
 {
     /**

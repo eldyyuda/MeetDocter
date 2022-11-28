@@ -26,6 +26,6 @@ class Specialist extends Model
     ];
     public function doctor()
     {
-        return $this->hasMany(Doctor::class,'specialist_id');
+        return $this->hasMany('App\Models\Operational\doctor','specialist_id');
     }
 }

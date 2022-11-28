@@ -4,7 +4,7 @@ namespace App\Http\Requests\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 class UpdateRoleRequest extends FormRequest
 {
@@ -28,7 +28,7 @@ class UpdateRoleRequest extends FormRequest
     {
         return [
             'title'=>[
-                'required','string','max:255',Rule::unique('Role')->ignore($this->Role),
+                'required','string','max:255',Rule::unique('role')->ignore($this->role),
             ],
         ];
     }

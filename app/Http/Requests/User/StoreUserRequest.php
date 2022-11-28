@@ -3,7 +3,8 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 class StoreUserRequest extends FormRequest
 {
     /**

@@ -5,8 +5,9 @@ use App\Models\MasterData\Consultation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 
-use Gate;
+// use Gate;
 class UpdateConsultationRequest extends FormRequest
 {
     /**

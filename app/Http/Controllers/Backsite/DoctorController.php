@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Illuminate\Support\Facades\Gate;
 use Auth;
-use File;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\Doctor\StoreDoctorRequest;
 use App\Http\Requests\Doctor\UpdateDoctorRequest;
 
@@ -39,17 +39,9 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(StoreDoctorRequest $request)
+    public function create(Request $request)
     {
-        $data = $request->all();
-        try {
-            $doctors=Doctor::create($data);
-            alert()->success('Success Message','Successfully added new Doctor!');
-            return redirect()->route('pages.backsite.operational.doctor.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
-            return back();
-        }
+        return abort(404);
     }
 
     /**
@@ -60,11 +52,33 @@ class DoctorController extends Controller
      */
     public function store(StoreDoctorRequest $request)
     {
-        $data=$request->all();
         try {
-            $doctors= Doctor::create($data);
-            alert()->success('Success Message','Successfully added a new Doctor!!');
-            return redirect()->route('pages.backsite.operational.doctor.index');
+            $data = $request->all();
+
+            // re format before push to table
+            $data['fee'] = str_replace(',', '', $data['fee']);
+            $data['fee'] = str_replace('IDR ', '', $data['fee']);
+    
+            // upload process here
+            $path = public_path('app/public/assets/file-doctor');
+            if(!File::isDirectory($path)){
+                $response = Storage::makeDirectory('public/assets/file-doctor');
+            }
+    
+            // change file locations
+            if(isset($data['photo'])){
+                $data['photo'] = $request->file('photo')->store(
+                    'assets/file-doctor', 'public'
+                );
+            }else{
+                $data['photo'] = "";
+            }
+    
+            // store to database
+            $doctor = Doctor::create($data);
+    
+            alert()->success('Success Message', 'Successfully added new doctor');
+            return redirect()->route('backsite.doctor.index');
         } catch (\Throwable $th) {
             alert()->success('Error Message',$th);
             return back();
@@ -110,9 +124,39 @@ class DoctorController extends Controller
         $data= $request->all();
         
         try {
-            $doctor->update($data);
-            alert()->success('Success Message','Successfully added Updated Doctor!');
-            return redirect()->route('pages.backsite.master-data.operational.index');
+            $data = $request->all();
+
+        // re format before push to table
+        $data['fee'] = str_replace(',', '', $data['fee']);
+        $data['fee'] = str_replace('IDR ', '', $data['fee']);
+
+        // upload process here
+        // change format photo
+        if(isset($data['photo'])){
+
+             // first checking old photo to delete from storage
+            $get_item = $doctor['photo'];
+
+            // change file locations
+            $data['photo'] = $request->file('photo')->store(
+                'assets/file-doctor', 'public'
+            );
+
+            // delete old photo from storage
+            $data_old = 'storage/'.$get_item;
+            if (File::exists($data_old)) {
+                File::delete($data_old);
+            }else{
+                File::delete('storage/app/public/'.$get_item);
+            }
+
+        }
+
+        // update to database
+        $doctor->update($data);
+
+        alert()->success('Success Message', 'Successfully updated doctor');
+        return redirect()->route('backsite.doctor.index');
         } catch (\Throwable $th) {
             alert()->error('Error Message',$th);
             return back();

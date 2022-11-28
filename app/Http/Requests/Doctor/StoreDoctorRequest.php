@@ -36,7 +36,7 @@ class StoreDoctorRequest extends FormRequest
                 'required','string','max:255',
             ],
             'photo'=>[
-                'nullable','string','max:1000',
+                'nullable', 'mimes:jpeg,svg,png', 'max:10000',
             ],
         ];
     }
