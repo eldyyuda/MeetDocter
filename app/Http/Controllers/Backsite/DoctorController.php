@@ -16,6 +16,7 @@ use App\Http\Requests\Doctor\UpdateDoctorRequest;
 
 use App\Models\MasterData\Specialist;
 use App\Models\Operational\Doctor;
+use Exception;
 use PhpParser\Comment\Doc;
 
 class DoctorController extends Controller
@@ -157,8 +158,8 @@ class DoctorController extends Controller
 
         alert()->success('Success Message', 'Successfully updated doctor');
         return redirect()->route('backsite.doctor.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }
@@ -175,8 +176,8 @@ class DoctorController extends Controller
             $doctor->delete();
             alert()->success('Success Message','Successfully delete Specialist!');
             return redirect()->route('pages.backsite.master-data.specialist.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }

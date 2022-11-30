@@ -15,6 +15,7 @@ use Auth;
 
 use App\Models\MasterData\Consultation;
 use App\Models\Operational\Doctor;
+use Exception;
 
 class ConsultationController extends Controller
 {
@@ -58,8 +59,8 @@ class ConsultationController extends Controller
             $consultation = Consultation::create($data);
             alert()->success('Success Message','Successfully added new Consultation!');
             return redirect()->route('pages.backsite.master-data.consultation.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }

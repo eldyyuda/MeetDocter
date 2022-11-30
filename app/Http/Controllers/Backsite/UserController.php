@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Http\Requests\User\UpdateUserRequest;
+use Exception;
+
 class UserController extends Controller
 {
     /**
@@ -86,10 +88,17 @@ class UserController extends Controller
 
         $role = Role::all()->pluck('title', 'id');
         $type_user = TypeUser::orderBy('name', 'asc')->get();
+        try {
+            // $user= new User();
+            $detailTypeUser=$user->detailUser->type_user_id;
+        } catch (Exception $e) {
+            alert()->error('error Message', $e->getMessage());
+            $detailTypeUser='';
+        }
         // dd($type_user);
         $user->load('role');
 
-        return view('pages.backsite.management-access.user.edit', compact('user', 'role', 'type_user'));
+        return view('pages.backsite.management-access.user.edit', compact('user', 'role', 'type_user','detailTypeUser'));
     }
 
     /**

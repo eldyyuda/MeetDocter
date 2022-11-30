@@ -4,33 +4,34 @@
 @section('title', 'Edit - User')
 
 @section('content')
+{{-- {{dd(Auth::user()->detailUser->type_user_id)}} --}}
 <!-- BEGIN: Content-->
-    <div class="app-content content">
-        <div class="content-overlay"></div>
-        <div class="content-wrapper">
-
-            {{-- error --}}
-            @if ($errors->any())
-                <div class="alert bg-danger alert-dismissible mb-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            {{-- breadcumb --}}
-            <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Edit User</h3>
-                    <div class="row breadcrumbs-top d-inline-block">
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        
+        {{-- error --}}
+        @if ($errors->any())
+        <div class="alert bg-danger alert-dismissible mb-2" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        
+        {{-- breadcumb --}}
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+                <h3 class="content-header-title mb-0 d-inline-block">Edit User</h3>
+                <div class="row breadcrumbs-top d-inline-block">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
                                 <li class="breadcrumb-item">User</li>
                                 <li class="breadcrumb-item active">Edit</li>
@@ -39,7 +40,7 @@
                     </div>
                 </div>
             </div>
-
+            
             {{-- forms --}}
             <div class="content-body"><!-- Basic form layout section start -->
                 <section id="horizontal-form-layouts">
@@ -62,25 +63,25 @@
                                             <p>Please complete the input <code>required</code>, before you click the submit button.</p>
                                         </div>
                                         <form class="form form-horizontal" action="{{ route("backsite.user.update", [$user->id]) }}" method="POST" enctype="multipart/form-data">
-
-                                                @method('PUT')
-                                                @csrf
-
+                                            
+                                            @method('PUT')
+                                            @csrf
+                                            
                                                 <div class="form-body">
-
+                                                    
                                                     <h4 class="form-section"><i class="fa fa-edit"></i> Form User</h4>
-
+                                                    
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="name">Name <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="name" name="name" class="form-control" placeholder="example John Doe or Jane" value="{{ old('name', isset($user) ? $user->name : '') }}" autocomplete="off" required>
-
+                                                            
                                                             @if($errors->has('name'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('name') }}</p>
+                                                            <p style="font-style: bold; color: red;">{{ $errors->first('name') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
-
+                                                    
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="email">Email <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
@@ -91,7 +92,7 @@
                                                             @endif
                                                         </div>
                                                     </div>
-
+                                                    
                                                     <div class="form-group row {{ $errors->has('role') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Role <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
@@ -101,17 +102,17 @@
                                                             </label>
 
                                                             <select name="role[]"
-                                                                    id="role"
-                                                                    class="form-control select2-full-bg"
-                                                                    data-bgcolor="teal" data-bgcolor-variation="lighten-3" data-text-color="black"
-                                                                    multiple="multiple" required>
+                                                            id="role"
+                                                            class="form-control select2-full-bg"
+                                                            data-bgcolor="teal" data-bgcolor-variation="lighten-3" data-text-color="black"
+                                                            multiple="multiple" required>
                                                                 @foreach($role as $id => $role)
-                                                                    <option value="{{ $id }}" {{ (in_array($id, old('role', [])) || isset($user) && $user->role->contains($id)) ? 'selected' : '' }}>{{ $role }}</option>
+                                                                <option value="{{ $id }}" {{ (in_array($id, old('role', [])) || isset($user) && $user->role->contains($id)) ? 'selected' : '' }}>{{ $role }}</option>
                                                                 @endforeach
                                                             </select>
-
+                                                            
                                                             @if($errors->has('role'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('role') }}</p>
+                                                            <p style="font-style: bold; color: red;">{{ $errors->first('role') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -120,11 +121,12 @@
                                                         <label class="col-md-3 label-control">Type User <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="type_user_id"
-                                                                    id="type_user_id"
-                                                                    class="form-control select2" required>
-                                                                    <option value="{{ '' }}" disabled selected>Choose</option>
-                                                                @foreach($type_user as $key => $type_user_item)
-                                                                    <option value="{{ $type_user_item->id }}" {{ $type_user_item->id == $user->detailUser->type_user_id ? 'selected' : '' }}>{{ $type_user_item->name }}</option>
+                                                            id="type_user_id"
+                                                            class="form-control select2" required>
+                                                            <option value="{{ '' }}" disabled selected>Choose</option>
+                                                            @foreach($type_user as $key => $type_user_item)
+                                                            {{-- {{try { $userType = $user->detailUser->type_user_id} catch (Exception $e){$userType = null;}}} --}}
+                                                            <option value="{{ $type_user_item->id }}" {{ $type_user_item->id == $detailTypeUser ? 'selected' : '' }}>{{ $type_user_item->name }}</option>
                                                                 @endforeach
                                                             </select>
 

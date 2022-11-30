@@ -14,6 +14,7 @@ use App\Http\Requests\Specialist\StoreSpecialistRequest;
 use App\Http\Requests\Specialist\UpdateSpecialistRequest;
 
 use App\Models\MasterData\Specialist;
+use Exception;
 
 class SpecialistController extends Controller
 {
@@ -58,7 +59,7 @@ class SpecialistController extends Controller
             $specialists = Specialist::create($data);
             alert()->success('Success Message','Successfully added new Specialist!');
             return redirect()->route('pages.backsite.master-data.specialist.index');
-        } catch (\Throwable $th) {
+        } catch (Exception $th) {
             alert()->error('Error Message',$th);
             return back();
         }
@@ -106,8 +107,8 @@ class SpecialistController extends Controller
             $specialist->update($data);
             alert()->success('Success Message','Successfully added Updated Specialist!');
             return redirect()->route('pages.backsite.master-data.specialist.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }
@@ -125,8 +126,8 @@ class SpecialistController extends Controller
             $specialist->delete();
             alert()->success('Success Message','Successfully delete Specialist!');
             return redirect()->route('pages.backsite.master-data.specialist.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message',$th->getMessage());
             return back();
         }
         
