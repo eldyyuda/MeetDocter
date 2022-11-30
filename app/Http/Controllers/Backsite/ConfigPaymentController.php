@@ -16,6 +16,7 @@ use App\Http\Requests\Doctor\UpdateDoctorRequest;
 
 use App\Models\MasterData\ConfigPayment;
 use App\Models\Operational\Doctor;
+use Exception;
 
 class ConfigPaymentController extends Controller
 {
@@ -95,8 +96,8 @@ class ConfigPaymentController extends Controller
             $configPayment->update($data);
             alert()->success('Success Message','Successfully added Updated Specialist!');
             return redirect()->route('pages.backsite.master-data.config-payment.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }

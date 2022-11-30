@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Models\ManagementAccess\Role;
 use App\Models\ManagementAccess\RoleUser;
 use App\Models\ManagementAccess\Permission;
+use Exception;
+
 class RoleController extends Controller
 {
     /**
@@ -57,8 +59,8 @@ class RoleController extends Controller
             $role = Role::create($data);
             alert()->success('Success Message','Successfully added new Role!');
             return redirect()->route('backsite.role.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }
@@ -105,8 +107,8 @@ class RoleController extends Controller
             $role->permission()->sync($request->input('permission',[]));
             alert()->success('Success Message','Successfully added Updated Role!');
             return redirect()->route('backsite.role.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }
@@ -125,8 +127,8 @@ class RoleController extends Controller
             $role->delete();
             alert()->success('Success Message','Successfully delete Specialist!');
             return redirect()->route('backsite.role.index');
-        } catch (\Throwable $th) {
-            alert()->error('Error Message',$th);
+        } catch (Exception $th) {
+            alert()->error('Error Message', $th->getMessage());
             return back();
         }
     }
