@@ -202,8 +202,9 @@
                                                                         <span class="badge bg-yellow text-dark mr-1 mb-1">{{ $item->title }}</span>
                                                                     @endforeach
                                                                 </td>
+                                                                {{-- {{$user_item->detail_user->type_user->name}} --}}
                                                                 <td style="width:200px;">
-                                                                    <span class="badge bg-success mr-1 mb-1">{{ $user_item->detail_user->type_user->name ?? '' }}</span>
+                                                                    <span class="badge bg-success mr-1 mb-1">{{ $user_item->detailUser->typeUser->name ?? '' }}</span>
                                                                 </td>
                                                                 <td class="text-center">
 
