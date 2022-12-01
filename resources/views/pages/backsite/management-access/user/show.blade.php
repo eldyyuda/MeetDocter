@@ -18,7 +18,7 @@
     <tr>
         <th>Type User</th>
         <td>
-            <span class="badge bg-success mr-1 mb-1">{{ isset($user->detail_user->type_user->name) ? $user->detail_user->type_user->name : 'N/A' }}</span>
+            <span class="badge bg-success mr-1 mb-1">{{ isset($user->detailUser->typeUser->name) ? $user->detail_user->type_user->name : 'N/A' }}</span>
         </td>
     </tr>
 </table>

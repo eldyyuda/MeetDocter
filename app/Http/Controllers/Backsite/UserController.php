@@ -120,8 +120,19 @@ class UserController extends Controller
 
         // save to detail user , to set type user
         $detail_user = DetailUser::find($user['id']);
-        $detail_user->type_user_id = $request['type_user_id'];
-        $detail_user->save();
+        // $detail_user
+        if ($detail_user === null) {
+            $detailUser=
+            [
+                'type_user_id' => $request['type_user_id'],
+                'user_id' => $user['id'],
+            ];
+            $detail=DetailUser::create($detailUser);
+        }else {
+            # code...
+            $detail_user->type_user_id = $request['type_user_id'];
+            $detail_user->save();
+        }
 
         alert()->success('Success Message', 'Successfully updated user');
         return redirect()->route('backsite.user.index');
