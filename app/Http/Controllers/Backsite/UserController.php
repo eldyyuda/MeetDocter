@@ -148,7 +148,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->forceDelete();
+        $user->delete();
 
         alert()->success('Success Message', 'Successfully deleted user');
         return back();
